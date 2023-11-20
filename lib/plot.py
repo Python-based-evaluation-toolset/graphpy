@@ -1,4 +1,5 @@
 from .table import Table
+from .utils import plt_save_close
 import matplotlib.pyplot as plt
 
 
@@ -17,5 +18,4 @@ def plot_build(table, output):
     ax.set_ylabel(table.ytitle)
     ax.set_xlabel(table.xtitle)
     ax.legend(table.legend_get())
-    plt.savefig(output, transparent=True)
-    plt.clf()
+    plt_save_close(ax, output)
