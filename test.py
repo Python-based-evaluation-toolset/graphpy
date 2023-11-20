@@ -1,5 +1,6 @@
 from lib.table import Table
 from lib.bar import bar_build
+from lib.plot import plot_build
 
 
 if __name__ == "__main__":
@@ -22,4 +23,5 @@ if __name__ == "__main__":
         table.object_add(key, value)
     table.stack = 2
     table.group = 2
-    bar_build(table, "demo.pdf")
+    bar_build(table, "demo-bar.pdf")
+    plot_build(table, "demo-plot.pdf")
