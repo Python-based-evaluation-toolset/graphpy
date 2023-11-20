@@ -27,4 +27,5 @@ def bar_build(table, output):
     ax.set_ylabel(table.ytitle)
     ax.set_xlabel(table.xtitle)
     ax.legend(table.legend_get()[0:legend_idx])
-    plt.show()
+    plt.savefig(output, transparent=True)
+    plt.clf()

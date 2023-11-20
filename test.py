@@ -22,4 +22,4 @@ if __name__ == "__main__":
         table.object_add(key, value)
     table.stack = 2
     table.group = 2
-    bar_build(table, "demo.png")
+    bar_build(table, "demo.pdf")
