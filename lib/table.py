@@ -21,3 +21,9 @@ class Table:
         self.obj.append(obj)
         for i in range(len(self.legend)):
             self.data[i].append(values[i])
+
+    def legend_get(legend):
+        return self.legend
+
+    def data_get(legend):
+        return self.data[self.legend.index(legend)]
