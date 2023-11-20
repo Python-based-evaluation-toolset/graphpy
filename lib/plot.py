@@ -1,4 +1,4 @@
-from lib.table import Table
+from .table import Table
 import matplotlib.pyplot as plt
 
 
