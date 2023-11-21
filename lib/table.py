@@ -1,4 +1,6 @@
 # Table is object presents to input of graph builder
+from collections import OrderedDict
+import matplotlib.pyplot as plt
 
 
 class Table:
@@ -10,6 +12,9 @@ class Table:
     def __init__(self, legend: list):
         # extra
         self.width = 0.25
+        # matplotlib figure
+        self.ax = None
+        self.fig = None
         # label
         self.title = None
         self.xtitle = None
@@ -21,7 +26,9 @@ class Table:
         self.obj = []
         self.data = []
         self.legend = legend
-        for i in range(len(self.legend)):
+        self.legend_root = legend.copy()
+        self.legend_ns = OrderedDict()
+        for i in range(len(self.legend_root)):
             self.data.append([])
 
     def object_add(self, obj, values: list):
@@ -31,14 +38,26 @@ class Table:
         for i in range(len(self.legend)):
             self.data[i].append(values[i])
 
-    def legend_get(self):
-        return self.legend
+    def ns_legend_create(self, name: str, legend: list):
+        """
+        namespace is used to isolate legends out of main graph
+        which is still drawn but not close the graph.
+        """
+        if len(self.obj) > 0:
+            raise Exception("Legend namespace is allowed only without any object.")
+        self.legend_ns[name] = legend
+        self.legend += legend
+        for i in range(len(legend)):
+            self.data.append([])
 
-    def data_get(self, legend):
+    def legend_get(self, namespace: str = None):
+        if namespace is None:
+            return self.legend_root
+        else:
+            return self.legend_ns[namespace]
+
+    def data_get(self, legend, namespace: str = None):
         return self.data[self.legend.index(legend)]
-
-    def data_get_by_idx(self, idx):
-        return self.data[idx]
 
     def obj_get(self):
         return self.obj

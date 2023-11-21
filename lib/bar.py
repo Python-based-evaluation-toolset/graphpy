@@ -3,8 +3,9 @@ from .utils import plt_save_close
 import matplotlib.pyplot as plt
 
 
-def bar_build(table, output, namespace: str = None):
-    fix, ax = plt.subplots()
+def bar_build(table, namespace: str = None):
+    fix = table.fig
+    ax = table.ax
     legends = table.legend_get(namespace)
     pre_legend = None
     bottom = [0 for i in range(len(table.obj_get()))]
@@ -12,11 +13,12 @@ def bar_build(table, output, namespace: str = None):
     stack = 1
     # build bar
     for legend in legends:
-        ax.bar(
+        lns = ax.bar(
             table.obj_arange_get(group),
             table.data_get(legend),
             width=table.width,
             bottom=bottom,
+            label=legend,
         )
         if stack < table.stack:
             stack += 1
@@ -33,5 +35,3 @@ def bar_build(table, output, namespace: str = None):
     ax.set_xticks(table.obj_arange_get(), table.obj_get())
     ax.set_ylabel(table.ytitle)
     ax.set_xlabel(table.xtitle)
-    ax.legend(legends)
-    plt_save_close(ax, output)
