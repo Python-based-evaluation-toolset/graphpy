@@ -40,8 +40,8 @@ class Table:
 
     def ns_legend_create(self, name: str, legend: list):
         """
-        namespace is used to isolate legends out of main graph
-        which is still drawn but not close the graph.
+        namespace is used to create isolated legend out of root.
+        Each namespace legends could be drawn differently.
         """
         if len(self.obj) > 0:
             raise Exception("Legend namespace is allowed only without any object.")
