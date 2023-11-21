@@ -10,10 +10,11 @@ def plt_open(table):
 def plt_save_close(table, file):
     plt.legend(
         loc="lower center",
-        bbox_to_anchor=(0, -0.1, 1, 2),
+        bbox_to_anchor=(0, -0.2, 1, 2),
         ncol=(len(table.legend) + 1) / 2,
         bbox_transform=plt.gcf().transFigure,
     )
+    plt.xticks(rotation=90, ha="right")
     table.fig.savefig(
         file,
         transparent=True,
