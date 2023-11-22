@@ -85,4 +85,62 @@ graphpy.utils.plt_save_close(table, "demo-bar.pdf")
 
 ## Multi-namespace usage
 
-TODO: coming soon
+Notice that there is demand to build different type of chart in single graph.
+We extend our interface to support it.
+From our perspective,
+the different chart of graph
+is different representation of attributes (legends) of object,
+while the object interface is not change.
+Therefore, in this extension,
+we propose an isolation mechanism to split legends into multiple namespace.
+We support to plot each legend namespace in different type of chart.
+
+To illustrate, our way to build graph starts by defined different legends.
+```python
+import graphpy
+
+legend = [
+    "attr-0", "attr-1",
+    "attr-2", "attr-3",
+    "attr-3", "attr-4",
+]
+
+legend_namespace = [
+    "attr-ns-0", "attr-ns-1"
+]
+```
+
+Then we create table with a root legend and namespace legend called "demo".
+```python
+table = graphpy.Table(legend)
+table.ns_legend_create("demo", legend_namespace)
+```
+
+After that, we insert object to table.
+```python
+obj = {
+    # root legend values + namespace legend values
+    "bar_0": [1, 2, 4, 2, 5, 2] + [2, 3],
+    "bar_1": [2, 2, 1, 5, 1, 3] + [1, 5],
+    "bar_2": [3, 2, 7, 1, 2, 4] + [3, 1],
+}
+for key, value in obj.items():
+    table.object_add(key, value)
+```
+
+Configuring meta information of table.
+```python
+table.title_set("interface demonstration")
+table.xtitle_set("scale-x")
+table.ytitle_set("scale-y")
+table.stack = 2
+table.group = 3
+```
+
+Finally, we draw graph with different chart for each namespace.
+```python
+graphpy.utils.plt_open(table)
+graphpy.bar_build(table)
+graphpy.plot_build(table, "demo") # specify namespace to build chart
+graphpy.utils.plt_save_close(table, "demo-bar-plot.pdf")
+```
