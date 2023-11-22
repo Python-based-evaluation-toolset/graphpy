@@ -1,5 +1,7 @@
 # Chartpy
 
+***WARN***: threading safety is not supported
+
 A small project to create an abstract interface to work with chart.
 We use matplotlib to render the chart.
 There are multiple type of charts and they are flexible to use.
